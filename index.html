@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Surendra Kumar Patel — Android Engineer</title>
+<meta name="description" content="Surendra Kumar Patel — Android Engineer with 5+ years building scalable apps with Kotlin, Jetpack Compose, Clean Architecture, MVI and BLE." />
+<meta property="og:title" content="Surendra Kumar Patel — Android Engineer" />
+<meta property="og:description" content="Android Engineer — Kotlin, Jetpack Compose, Clean Architecture, BLE." />
+<meta property="og:type" content="website" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bg:#0a0b0e;
+    --bg-2:#0f1117;
+    --surface:#13151d;
+    --surface-2:#171a23;
+    --border:rgba(255,255,255,0.08);
+    --border-bright:rgba(255,255,255,0.16);
+    --text:#e9eaef;
+    --text-dim:#9498a6;
+    --text-faint:#5b5f6d;
+    --accent:#5b8cff;
+    --accent-2:#a78bfa;
+    --accent-glow:rgba(91,140,255,0.16);
+    --max:1180px;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Hanken Grotesk',sans-serif;
+    font-size:17px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  ::selection{background:var(--accent);color:#fff}
+
+  body::before{
+    content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.022) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(255,255,255,0.022) 1px,transparent 1px);
+    background-size:64px 64px;
+  }
+  body::after{
+    content:"";position:fixed;top:-280px;left:50%;transform:translateX(-50%);
+    width:900px;height:620px;z-index:0;pointer-events:none;
+    background:radial-gradient(ellipse at center,var(--accent-glow),transparent 70%);
+    filter:blur(20px);
+  }
+
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 28px;position:relative;z-index:1}
+
+  .mono{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+  }
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:50;
+    backdrop-filter:blur(14px);
+    background:rgba(10,11,14,0.72);
+    border-bottom:1px solid transparent;
+    transition:border-color .3s,background .3s;
+  }
+  nav.scrolled{border-bottom:1px solid var(--border);background:rgba(10,11,14,0.9)}
+  .nav-inner{
+    max-width:var(--max);margin:0 auto;padding:16px 28px;
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  .logo{display:flex;align-items:center;gap:10px;font-weight:700}
+  .logo .mark{
+    width:34px;height:34px;border:1px solid var(--accent);
+    display:grid;place-items:center;border-radius:7px;
+    font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--accent);
+    background:var(--accent-glow);
+  }
+  .logo .name{font-family:'Bricolage Grotesque',sans-serif;font-size:16px;letter-spacing:-.01em}
+  .nav-links{display:flex;align-items:center;gap:24px}
+  .nav-links a{
+    color:var(--text-dim);font-size:14px;font-weight:500;
+    transition:color .2s;position:relative;padding:4px 0;
+  }
+  .nav-links a:hover{color:var(--text)}
+  .nav-links a.active{color:var(--text)}
+  .nav-links a:not(.nav-cta).active::after{
+    content:"";position:absolute;left:0;right:0;bottom:-2px;height:2px;
+    background:var(--accent);border-radius:2px;
+  }
+  .nav-cta{
+    border:1px solid var(--border-bright);padding:9px 18px;border-radius:8px;
+    color:var(--text)!important;font-size:13px;
+    transition:border-color .2s,background .2s;
+  }
+  .nav-cta:hover{border-color:var(--accent);background:var(--accent-glow)}
+  .burger{display:none;background:none;border:0;cursor:pointer;flex-direction:column;gap:5px;padding:6px}
+  .burger span{width:22px;height:2px;background:var(--text);display:block;transition:.25s}
+
+  /* ---------- HERO ---------- */
+  header{
+    min-height:100vh;display:flex;align-items:center;
+    padding:140px 0 90px;position:relative;
+  }
+  .signal{
+    position:absolute;right:-120px;top:50%;transform:translateY(-50%);
+    width:560px;height:560px;pointer-events:none;opacity:.5;
+  }
+  .signal circle{fill:none;stroke:var(--accent);stroke-width:1}
+  .ring{transform-origin:center;animation:pulse 4s ease-out infinite}
+  .ring:nth-child(2){animation-delay:1s}
+  .ring:nth-child(3){animation-delay:2s}
+  .ring:nth-child(4){animation-delay:3s}
+  @keyframes pulse{
+    0%{transform:scale(.3);opacity:.7}
+    100%{transform:scale(1);opacity:0}
+  }
+
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:10px;
+    color:var(--accent);margin-bottom:26px;
+  }
+  .eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);
+    box-shadow:0 0 12px var(--accent)}
+
+  h1{
+    font-family:'Bricolage Grotesque',sans-serif;
+    font-weight:800;line-height:1.02;letter-spacing:-.035em;
+    font-size:clamp(2.9rem,8vw,5.6rem);
+    margin-bottom:26px;
+  }
+  h1 .accent{
+    background:linear-gradient(120deg,var(--accent),var(--accent-2));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .lead{
+    max-width:580px;color:var(--text-dim);font-size:clamp(1rem,2.3vw,1.18rem);
+    margin-bottom:38px;
+  }
+  .lead strong{color:var(--text);font-weight:600}
+
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:56px}
+  .btn{
+    display:inline-flex;align-items:center;gap:9px;
+    padding:14px 26px;border-radius:10px;font-size:15px;font-weight:600;
+    transition:transform .2s,box-shadow .2s,background .2s,border-color .2s;
+  }
+  .btn-primary{background:var(--accent);color:#fff;box-shadow:0 8px 28px var(--accent-glow)}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 34px var(--accent-glow)}
+  .btn-ghost{border:1px solid var(--border-bright);color:var(--text)}
+  .btn-ghost:hover{border-color:var(--accent);transform:translateY(-2px)}
+
+  .stats{display:flex;gap:42px;flex-wrap:wrap}
+  .stat .num{
+    font-family:'Bricolage Grotesque',sans-serif;font-weight:700;
+    font-size:2rem;letter-spacing:-.02em;
+  }
+  .stat .num span{color:var(--accent)}
+  .stat .lbl{color:var(--text-faint);font-size:13px;margin-top:2px}
+
+  /* ---------- SECTION SHELL ---------- */
+  section{padding:110px 0;position:relative;scroll-margin-top:84px}
+  .sec-head{margin-bottom:54px}
+  .sec-tag{color:var(--accent);display:flex;align-items:center;gap:12px;margin-bottom:16px}
+  .sec-tag::after{content:"";height:1px;flex:1;background:var(--border);max-width:120px}
+  .sec-title{
+    font-family:'Bricolage Grotesque',sans-serif;font-weight:700;
+    font-size:clamp(2rem,5vw,3rem);letter-spacing:-.03em;line-height:1.05;
+  }
+  .sec-sub{color:var(--text-dim);font-size:15px;margin-top:14px;max-width:560px}
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:60px;align-items:start}
+  .about-text p{color:var(--text-dim);margin-bottom:20px}
+  .about-text p strong{color:var(--text);font-weight:600}
+  .about-card{
+    border:1px solid var(--border);border-radius:14px;background:var(--surface);
+    padding:30px;position:relative;
+  }
+  .about-card::before{
+    content:"";position:absolute;top:-1px;left:24px;right:24px;height:1px;
+    background:linear-gradient(90deg,transparent,var(--accent),transparent);
+  }
+  .about-card h3{
+    font-family:'Bricolage Grotesque',sans-serif;font-size:1.05rem;
+    margin-bottom:18px;font-weight:600;
+  }
+  .fact{display:flex;justify-content:space-between;gap:16px;
+    padding:11px 0;border-bottom:1px dashed var(--border)}
+  .fact:last-child{border-bottom:0}
+  .fact .k{color:var(--text-faint);font-size:13px}
+  .fact .v{color:var(--text);font-size:14px;text-align:right;font-weight:500}
+
+  /* ---------- EXPERTISE ---------- */
+  .skill-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+  .skill-block{
+    border:1px solid var(--border);border-radius:14px;background:var(--surface);
+    padding:26px;transition:border-color .25s,transform .25s;
+  }
+  .skill-block:hover{border-color:var(--border-bright);transform:translateY(-3px)}
+  .skill-block .idx{color:var(--accent);font-family:'JetBrains Mono',monospace;
+    font-size:12px;margin-bottom:14px}
+  .skill-block h4{
+    font-family:'Bricolage Grotesque',sans-serif;font-size:1.15rem;
+    margin-bottom:16px;font-weight:600;
+  }
+  .tags{display:flex;flex-wrap:wrap;gap:8px}
+  .tag{
+    font-family:'JetBrains Mono',monospace;font-size:12px;
+    padding:6px 11px;border-radius:6px;
+    background:var(--surface-2);border:1px solid var(--border);color:var(--text-dim);
+  }
+  .skill-block:hover .tag{border-color:var(--border-bright)}
+  .also{margin-top:22px;color:var(--text-faint);font-size:14px}
+  .also span{color:var(--text-dim)}
+
+  /* ---------- EXPERIENCE TIMELINE ---------- */
+  .timeline{position:relative;margin-left:5px}
+  .timeline::before{
+    content:"";position:absolute;left:5px;top:7px;bottom:7px;width:1px;background:var(--border);
+  }
+  .tl-item{
+    position:relative;padding:0 0 46px 38px;
+    display:grid;grid-template-columns:158px 1fr;gap:34px;
+  }
+  .tl-item:last-child{padding-bottom:0}
+  .tl-item::before{
+    content:"";position:absolute;left:0;top:6px;
+    width:11px;height:11px;border-radius:50%;
+    background:var(--bg);border:2px solid var(--accent);
+  }
+  .tl-item.current::before{background:var(--accent);box-shadow:0 0 12px var(--accent)}
+  .tl-date{font-family:'JetBrains Mono',monospace;font-size:12.5px}
+  .tl-date .yr{color:var(--accent);display:block;letter-spacing:.04em}
+  .tl-date .loc{color:var(--text-faint);display:block;margin-top:6px;letter-spacing:.04em}
+  .tl-content h3{
+    font-family:'Bricolage Grotesque',sans-serif;font-size:1.3rem;
+    font-weight:700;letter-spacing:-.02em;margin-bottom:3px;
+  }
+  .tl-content .co{color:var(--text-dim);font-size:14px;margin-bottom:14px}
+  .tl-content .co em{color:var(--accent-2);font-style:normal}
+  .tl-content ul{list-style:none;display:flex;flex-direction:column;gap:9px}
+  .tl-content li{
+    color:var(--text-dim);font-size:14.5px;padding-left:20px;position:relative;
+  }
+  .tl-content li::before{
+    content:"";position:absolute;left:0;top:9px;width:6px;height:6px;
+    border-radius:1px;background:var(--accent);transform:rotate(45deg);
+  }
+
+  /* ---------- WORK / PROJECT CARDS ---------- */
+  .work-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+  .project{
+    border:1px solid var(--border);border-radius:16px;background:var(--surface);
+    padding:32px;position:relative;overflow:hidden;
+    transition:border-color .3s,transform .3s,box-shadow .3s;
+  }
+  .project::after{
+    content:"";position:absolute;inset:0;border-radius:16px;pointer-events:none;
+    background:radial-gradient(420px circle at var(--mx,50%) var(--my,0%),var(--accent-glow),transparent 60%);
+    opacity:0;transition:opacity .35s;
+  }
+  .project:hover{border-color:var(--border-bright);transform:translateY(-4px);
+    box-shadow:0 18px 50px rgba(0,0,0,.4)}
+  .project:hover::after{opacity:1}
+  .proj-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px}
+  .proj-idx{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--text-faint)}
+  .proj-badge{
+    font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.08em;
+    padding:5px 10px;border-radius:20px;text-transform:uppercase;
+  }
+  .badge-personal{background:rgba(167,139,250,.12);color:var(--accent-2);
+    border:1px solid rgba(167,139,250,.3)}
+  .badge-pro{background:var(--accent-glow);color:var(--accent);
+    border:1px solid rgba(91,140,255,.3)}
+  .badge-live{background:rgba(74,222,128,.1);color:#4ade80;
+    border:1px solid rgba(74,222,128,.3)}
+  .project h3{
+    font-family:'Bricolage Grotesque',sans-serif;font-size:1.5rem;
+    font-weight:700;letter-spacing:-.02em;margin-bottom:10px;
+  }
+  .project p{color:var(--text-dim);font-size:15px;margin-bottom:20px}
+  .proj-tags{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:22px}
+  .proj-actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center;position:relative;z-index:1}
+  .btn-apk{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:'JetBrains Mono',monospace;font-size:12.5px;font-weight:500;
+    padding:10px 16px;border-radius:9px;
+    border:1px solid var(--border-bright);color:var(--text);
+    transition:border-color .2s,background .2s,transform .2s;
+  }
+  .btn-apk:hover{border-color:var(--accent);background:var(--accent-glow);transform:translateY(-2px)}
+  .btn-apk.muted{color:var(--text-faint);cursor:default}
+  .btn-apk.muted:hover{border-color:var(--border-bright);background:none;transform:none}
+  .proj-link{
+    display:inline-flex;align-items:center;gap:7px;
+    color:var(--accent);font-size:13.5px;font-weight:600;
+  }
+  .proj-link svg{transition:transform .2s}
+  .proj-link:hover svg{transform:translate(3px,-3px)}
+
+  /* ---------- RECOGNITION ---------- */
+  .rec-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+  .rec{
+    border:1px solid var(--border);border-radius:14px;background:var(--surface);
+    padding:30px;position:relative;
+  }
+  .rec.full{grid-column:1/-1}
+  .rec .year{
+    font-family:'JetBrains Mono',monospace;color:var(--accent);
+    font-size:13px;margin-bottom:14px;
+  }
+  .rec h3{
+    font-family:'Bricolage Grotesque',sans-serif;font-size:1.25rem;
+    font-weight:700;margin-bottom:6px;
+  }
+  .rec .org{color:var(--text-faint);font-size:13px;margin-bottom:14px}
+  .rec p{color:var(--text-dim);font-size:14.5px}
+  .cert-list{display:flex;flex-direction:column;gap:12px}
+  .cert-list .item{
+    display:flex;gap:14px;align-items:baseline;
+    padding-bottom:12px;border-bottom:1px dashed var(--border);
+  }
+  .cert-list .item:last-child{border-bottom:0;padding-bottom:0}
+  .cert-list .item .nm{color:var(--text);font-weight:600;font-size:14.5px}
+  .cert-list .item .by{color:var(--text-faint);font-size:13px;margin-left:auto;text-align:right}
+
+  /* ---------- CONTACT ---------- */
+  .contact{
+    border:1px solid var(--border);border-radius:20px;
+    background:linear-gradient(160deg,var(--surface),var(--bg-2));
+    padding:60px 48px;text-align:center;position:relative;overflow:hidden;
+  }
+  .contact::before{
+    content:"";position:absolute;top:-140px;left:50%;transform:translateX(-50%);
+    width:480px;height:300px;
+    background:radial-gradient(ellipse,var(--accent-glow),transparent 70%);
+  }
+  .contact h2{
+    font-family:'Bricolage Grotesque',sans-serif;font-weight:800;
+    font-size:clamp(2rem,5vw,3.2rem);letter-spacing:-.03em;
+    margin-bottom:16px;position:relative;
+  }
+  .contact p{color:var(--text-dim);max-width:460px;margin:0 auto 32px;position:relative}
+  .contact-links{
+    display:flex;gap:14px;justify-content:center;flex-wrap:wrap;position:relative;
+  }
+  .clink{
+    display:inline-flex;align-items:center;gap:9px;
+    border:1px solid var(--border-bright);padding:13px 22px;border-radius:10px;
+    font-size:14px;font-weight:600;transition:border-color .2s,background .2s,transform .2s;
+  }
+  .clink:hover{border-color:var(--accent);background:var(--accent-glow);transform:translateY(-2px)}
+  .clink svg{width:17px;height:17px}
+
+  /* ---------- FOOTER ---------- */
+  footer{border-top:1px solid var(--border);padding:40px 0;margin-top:30px}
+  .foot-inner{
+    display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;
+    color:var(--text-faint);font-size:13px;
+  }
+  .foot-inner .mono{color:var(--text-faint)}
+
+  /* ---------- REVEAL ANIM ---------- */
+  .reveal{opacity:0;transform:translateY(28px);
+    transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+
+  .hero-anim>*{opacity:0;transform:translateY(24px);
+    animation:rise .8s cubic-bezier(.2,.7,.2,1) forwards}
+  .hero-anim>*:nth-child(1){animation-delay:.05s}
+  .hero-anim>*:nth-child(2){animation-delay:.15s}
+  .hero-anim>*:nth-child(3){animation-delay:.25s}
+  .hero-anim>*:nth-child(4){animation-delay:.35s}
+  .hero-anim>*:nth-child(5){animation-delay:.45s}
+  @keyframes rise{to{opacity:1;transform:none}}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media(max-width:860px){
+    .about-grid{grid-template-columns:1fr;gap:34px}
+    .skill-grid,.work-grid,.rec-grid{grid-template-columns:1fr}
+    .rec.full{grid-column:auto}
+    .tl-item{grid-template-columns:1fr;gap:10px}
+    .signal{display:none}
+    .nav-links{
+      position:fixed;top:67px;left:0;right:0;
+      background:rgba(10,11,14,0.97);backdrop-filter:blur(14px);
+      flex-direction:column;gap:0;padding:8px 0;
+      border-bottom:1px solid var(--border);
+      transform:translateY(-130%);transition:transform .3s;
+    }
+    .nav-links.open{transform:none}
+    .nav-links a{padding:14px 28px;width:100%;font-size:15px}
+    .nav-links a:not(.nav-cta).active::after{display:none}
+    .nav-links .nav-cta{margin:8px 28px;text-align:center}
+    .burger{display:flex}
+    section{padding:80px 0}
+    .contact{padding:48px 24px}
+  }
+</style>
+</head>
+<body>
+
+<!-- ════════════════ NAV ════════════════ -->
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="#top" class="logo">
+      <span class="mark">SP</span>
+      <span class="name">Surendra Patel</span>
+    </a>
+    <div class="nav-links" id="navlinks">
+      <a href="#about" data-link>About</a>
+      <a href="#expertise" data-link>Expertise</a>
+      <a href="#experience" data-link>Experience</a>
+      <a href="#projects" data-link>Projects</a>
+      <a href="#work" data-link>Work</a>
+      <a href="#contact" data-link>Contact</a>
+      <!-- EDIT: résumé link below -->
+      <a class="nav-cta" href="https://drive.google.com/file/d/1dKl_aYwDSeVr2qTmuom2kNWvlqq31QL7/view" target="_blank" rel="noopener">Résumé</a>
+    </div>
+    <button class="burger" id="burger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ════════════════ HERO ════════════════ -->
+<header id="top">
+  <svg class="signal" viewBox="0 0 200 200" aria-hidden="true">
+    <g>
+      <circle class="ring" cx="100" cy="100" r="90"/>
+      <circle class="ring" cx="100" cy="100" r="90"/>
+      <circle class="ring" cx="100" cy="100" r="90"/>
+      <circle class="ring" cx="100" cy="100" r="90"/>
+    </g>
+    <circle cx="100" cy="100" r="4" fill="#5b8cff"/>
+  </svg>
+  <div class="wrap hero-anim">
+    <span class="eyebrow mono"><span class="dot"></span>Android Engineer · Bengaluru, India</span>
+    <h1>Android, built<br>to <span class="accent">scale &amp; last.</span></h1>
+    <p class="lead">
+      I'm <strong>Surendra Kumar Patel</strong> — an Android engineer with
+      <strong>5+ years</strong> shipping scalable, high-performance apps across
+      healthtech and edtech. Kotlin and Jetpack Compose on the surface;
+      <strong>Clean Architecture, MVI and BLE</strong> underneath.
+    </p>
+    <div class="hero-cta">
+      <a href="#projects" class="btn btn-primary">
+        View selected work
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
+      <a href="#contact" class="btn btn-ghost">Get in touch</a>
+    </div>
+    <div class="stats">
+      <div class="stat">
+        <div class="num">5<span>+</span></div>
+        <div class="lbl">Years building Android</div>
+      </div>
+      <div class="stat">
+        <div class="num">100<span>%</span></div>
+        <div class="lbl">Kotlin-first development</div>
+      </div>
+      <div class="stat">
+        <div class="num">SIH <span>'20</span></div>
+        <div class="lbl">National hackathon winner</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ════════════════ 01 · ABOUT ════════════════ -->
+<section id="about">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-tag mono">01 — About</span>
+      <h2 class="sec-title">Engineer first.<br>Always have been.</h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p>
+          I'm an Android engineer with <strong>5+ years of experience</strong> building
+          scalable, high-performance mobile applications with <strong>Kotlin, Jetpack
+          Compose</strong> and modern Android architecture. I've shipped products across
+          <strong>healthtech and edtech</strong> — designing reusable platform components,
+          lifting user engagement, and optimizing performance.
+        </p>
+        <p>
+          More recently my work has gone deeper into the platform:
+          <strong>BLE stack development</strong>, IoT security, biometric authentication
+          and encrypted storage. I care about <strong>Clean Architecture</strong>,
+          predictable <strong>MVI</strong> state, and code that a team can pick up and
+          extend without friction.
+        </p>
+        <p>
+          Alongside engineering, I run <strong>Tejvon</strong> — a technology studio and
+          personal brand — where I build tools of my own and write for developers. I'd
+          rather ship the simplest design that works than the cleverest one that doesn't.
+        </p>
+      </div>
+      <aside class="about-card reveal">
+        <h3>At a glance</h3>
+        <div class="fact"><span class="k">Role</span><span class="v">Android Engineer</span></div>
+        <div class="fact"><span class="k">Based in</span><span class="v">Bengaluru, India</span></div>
+        <div class="fact"><span class="k">Experience</span><span class="v">5+ years</span></div>
+        <div class="fact"><span class="k">Core stack</span><span class="v">Kotlin · Compose</span></div>
+        <div class="fact"><span class="k">Specialty</span><span class="v">BLE · Architecture</span></div>
+        <div class="fact"><span class="k">Studio</span><span class="v">Tejvon</span></div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════ 02 · EXPERTISE ════════════════ -->
+<section id="expertise">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-tag mono">02 — Expertise</span>
+      <h2 class="sec-title">The toolkit.</h2>
+    </div>
+    <div class="skill-grid">
+      <div class="skill-block reveal">
+        <div class="idx">/ 01</div>
+        <h4>Languages &amp; Frameworks</h4>
+        <div class="tags">
+          <span class="tag">Kotlin</span><span class="tag">Java</span>
+          <span class="tag">Jetpack Compose</span><span class="tag">Coroutines</span>
+          <span class="tag">Flow</span><span class="tag">Swift</span>
+          <span class="tag">SwiftUI</span><span class="tag">REST · JSON</span>
+        </div>
+      </div>
+      <div class="skill-block reveal">
+        <div class="idx">/ 02</div>
+        <h4>Architecture &amp; Design</h4>
+        <div class="tags">
+          <span class="tag">Clean Architecture</span><span class="tag">MVI</span>
+          <span class="tag">MVVM</span><span class="tag">SOLID</span>
+          <span class="tag">Dagger / Hilt</span><span class="tag">Room</span>
+          <span class="tag">Retrofit</span><span class="tag">WorkManager</span>
+          <span class="tag">Navigation</span><span class="tag">Firebase</span>
+        </div>
+      </div>
+      <div class="skill-block reveal">
+        <div class="idx">/ 03</div>
+        <h4>Specialized</h4>
+        <div class="tags">
+          <span class="tag">BLE Stack Development</span><span class="tag">IoT Security</span>
+          <span class="tag">Biometric Auth</span><span class="tag">SQLCipher</span>
+        </div>
+      </div>
+      <div class="skill-block reveal">
+        <div class="idx">/ 04</div>
+        <h4>Performance &amp; Quality</h4>
+        <div class="tags">
+          <span class="tag">R8 / ProGuard</span><span class="tag">APK Size Reduction</span>
+          <span class="tag">Gradle Optimization</span><span class="tag">Memory Profiling</span>
+          <span class="tag">JUnit</span><span class="tag">Mockito</span>
+          <span class="tag">Espresso</span>
+        </div>
+      </div>
+    </div>
+    <p class="also reveal">
+      Tools &amp; platforms: <span>Android Studio · Xcode · Git &amp; Bitbucket · Jira ·
+      Postman · Google Play Console</span> &nbsp;·&nbsp; CS fundamentals:
+      <span>Data Structures &amp; Algorithms · System Design · Material Design</span>
+    </p>
+  </div>
+</section>
+
+<!-- ════════════════ 03 · EXPERIENCE ════════════════ -->
+<section id="experience">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-tag mono">03 — Experience</span>
+      <h2 class="sec-title">Where I've worked.</h2>
+    </div>
+    <div class="timeline">
+
+      <!-- EDIT: each .tl-item is one job -->
+      <div class="tl-item current reveal">
+        <div class="tl-date">
+          <span class="yr">Dec 2025 — Present</span>
+          <span class="loc">Bengaluru</span>
+        </div>
+        <div class="tl-content">
+          <h3>Android Engineer</h3>
+          <p class="co">MSM Consultancy &nbsp;·&nbsp; <em>Client: Tata Elxsi</em></p>
+          <ul>
+            <li>Designed a custom fragmentation protocol for BLE communication, enabling reliable transmission of payloads up to 10KB.</li>
+            <li>Architected anti-MITM security with secure pairing, key-exchange validation and session-based authentication.</li>
+            <li>Improved data throughput by 22% via MTU optimization, batching and efficient payload encoding.</li>
+            <li>Led the migration to an MVI architecture and built reusable BLE components with CRC-16 integrity validation.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-item reveal">
+        <div class="tl-date">
+          <span class="yr">Nov 2023 — Nov 2024</span>
+          <span class="loc">Remote</span>
+        </div>
+        <div class="tl-content">
+          <h3>Mobile App Developer</h3>
+          <p class="co">Indus Hindi &nbsp;·&nbsp; <em>EdTech</em></p>
+          <ul>
+            <li>Built native Android (Kotlin, Compose) and iOS (Swift, SwiftUI) apps on a clean MVVM architecture.</li>
+            <li>Architected offline-first learning with Room, enabling uninterrupted access to educational content.</li>
+            <li>Redesigned the quiz UI/UX in Compose — a 25% improvement in completion rates.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-item reveal">
+        <div class="tl-date">
+          <span class="yr">Jul 2024 — Nov 2024</span>
+          <span class="loc">Hyderabad</span>
+        </div>
+        <div class="tl-content">
+          <h3>Android Developer</h3>
+          <p class="co">Thinkhat Software Pvt. Ltd. &nbsp;·&nbsp; <em>HealthTech</em></p>
+          <ul>
+            <li>Built healthcare apps (Noki, Patient Portal) with Kotlin, Compose, MVVM and Retrofit — 25% faster cycles.</li>
+            <li>Integrated AI speech-to-text via Azure Cognitive Services for accessible clinical voice input.</li>
+            <li>Developed a multi-tenant Firebase authentication system, cutting login issues by 32%.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-item reveal">
+        <div class="tl-date">
+          <span class="yr">Nov 2022 — Jun 2024</span>
+          <span class="loc">Mysore</span>
+        </div>
+        <div class="tl-content">
+          <h3>Android Developer</h3>
+          <p class="co">Tosko Technologies Pvt. Ltd.</p>
+          <ul>
+            <li>Launched the Tosko Academics App on Google Play with Firebase auth and ExoPlayer video delivery.</li>
+            <li>Reduced APK size by 20% via R8 and resource shrinking; cut Gradle build time by 65%.</li>
+            <li>Led the legacy XML-to-Compose migration, improving screen load times by 25%.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-item reveal">
+        <div class="tl-date">
+          <span class="yr">Jan 2021 — Oct 2022</span>
+          <span class="loc">Remote</span>
+        </div>
+        <div class="tl-content">
+          <h3>Android Developer &amp; Consultant</h3>
+          <p class="co">Independent &nbsp;·&nbsp; <em>Early-stage startups</em></p>
+          <ul>
+            <li>Delivered 6+ Android apps across healthtech, edtech and commerce — functional MVPs in 5–10 weeks.</li>
+            <li>Worked directly with non-technical founders, owning the full lifecycle through to Play Store release.</li>
+            <li>Built on MVVM and Clean Architecture for maintainable, hand-off-ready code.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════ 04 · PERSONAL PROJECTS ════════════════ -->
+<!-- ░░░ HOW TO ADD AN APK ░░░
+     1. Build the APK in Android Studio  (Build ▸ Build APK(s)  or  Generate Signed APK).
+     2. Rename it clearly, e.g.  habit-tracker.apk
+     3. Put the file in the  apks/  folder in your repo root.
+     4. Copy the TEMPLATE CARD below, paste it inside <div class="work-grid"> ...
+        and edit the name, badge, text, tags and the apk href.
+     5. Commit & push. Done.
+
+     ── TEMPLATE CARD — copy everything between the lines ──────────────
+     <article class="project" data-tilt>
+       <div class="proj-top">
+         <span class="proj-idx">00X</span>
+         <span class="proj-badge badge-personal">Personal · YEAR</span>
+       </div>
+       <h3>PROJECT NAME</h3>
+       <p>One or two sentences describing what the app does and how it is built.</p>
+       <div class="proj-tags">
+         <span class="tag">Kotlin</span><span class="tag">Compose</span>
+       </div>
+       <div class="proj-actions">
+         <a class="btn-apk" href="apks/your-file-name.apk" download>
+           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 19h16"/></svg>
+           Download APK
+         </a>
+       </div>
+     </article>
+     ───────────────────────────────────────────────────────────────── -->
+<section id="projects">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-tag mono">04 — Personal Projects</span>
+      <h2 class="sec-title">Things I build for myself.</h2>
+      <p class="sec-sub">Apps I designed and shipped on my own time. Download the APKs to try them on any Android device.</p>
+    </div>
+    <div class="work-grid">
+
+      <article class="project reveal" data-tilt>
+        <div class="proj-top">
+          <span class="proj-idx">001</span>
+          <span class="proj-badge badge-personal">Ongoing · 2025</span>
+        </div>
+        <h3>Habit Tracker</h3>
+        <p>
+          A production-grade habit tracker with encrypted local storage (SQLCipher),
+          biometric authentication and gamification — XP, achievements and streaks.
+          Built on multi-module Clean Architecture with an MVI (Orbit) pattern.
+        </p>
+        <div class="proj-tags">
+          <span class="tag">Kotlin</span><span class="tag">Compose</span>
+          <span class="tag">MVI · Orbit</span><span class="tag">Room · SQLCipher</span>
+          <span class="tag">Hilt</span>
+        </div>
+        <div class="proj-actions">
+          <span class="btn-apk muted">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 19h16"/></svg>
+            APK coming soon
+          </span>
+        </div>
+      </article>
+
+      <article class="project reveal" data-tilt>
+        <div class="proj-top">
+          <span class="proj-idx">002</span>
+          <span class="proj-badge badge-personal">Personal · 2024</span>
+        </div>
+        <h3>AI Chat Assistant</h3>
+        <p>
+          An AI-powered Android assistant with voice-to-text chat — Azure Speech Services
+          for input and the OpenAI GPT-4 API for responses, wrapped in a modern Compose UI
+          on a structured MVVM architecture.
+        </p>
+        <div class="proj-tags">
+          <span class="tag">Kotlin</span><span class="tag">Compose</span>
+          <span class="tag">OpenAI GPT API</span><span class="tag">Retrofit</span>
+          <span class="tag">MVVM</span>
+        </div>
+        <div class="proj-actions">
+          <a class="btn-apk" href="apks/ai-chat-assistant.apk" download>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 19h16"/></svg>
+            Download APK
+          </a>
+        </div>
+      </article>
+
+      <article class="project reveal" data-tilt>
+        <div class="proj-top">
+          <span class="proj-idx">003</span>
+          <span class="proj-badge badge-personal">Personal · 2023</span>
+        </div>
+        <h3>WhatsApp Status Saver</h3>
+        <p>
+          A lightweight utility to preview, download and manage WhatsApp statuses locally
+          — no root required. Uses Android file-system APIs to read media directories,
+          with Glide and Picasso for smooth image loading.
+        </p>
+        <div class="proj-tags">
+          <span class="tag">Java</span><span class="tag">XML</span>
+          <span class="tag">Android SDK</span><span class="tag">Glide</span>
+          <span class="tag">Picasso</span>
+        </div>
+        <div class="proj-actions">
+          <a class="btn-apk" href="apks/whatsapp-status-saver.apk" download>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 19h16"/></svg>
+            Download APK
+          </a>
+        </div>
+      </article>
+
+      <!-- ▸ ADD MORE APK CARDS HERE — copy the TEMPLATE CARD from the comment above -->
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════ 05 · PROFESSIONAL WORK ════════════════ -->
+<section id="work">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-tag mono">05 — Professional Work</span>
+      <h2 class="sec-title">Work shipped with teams.</h2>
+      <p class="sec-sub">Selected products built for companies and clients. Some are internal or hardware-bound, so not all are publicly downloadable.</p>
+    </div>
+    <div class="work-grid">
+
+      <article class="project reveal" data-tilt>
+        <div class="proj-top">
+          <span class="proj-idx">001</span>
+          <span class="proj-badge badge-pro">Current</span>
+        </div>
+        <h3>BLE Communication Platform</h3>
+        <p>
+          A secure Bluetooth Low Energy stack for a connected hardware device — custom
+          payload fragmentation, anti-MITM pairing, CRC-16 integrity checks and adaptive
+          retry logic. Built in Kotlin with firmware-team collaboration.
+        </p>
+        <div class="proj-tags">
+          <span class="tag">Kotlin</span><span class="tag">BLE / GATT</span>
+          <span class="tag">MVI</span><span class="tag">CRC-16</span>
+        </div>
+        <div class="proj-actions">
+          <span class="btn-apk muted">Client project · embedded device</span>
+        </div>
+      </article>
+
+      <article class="project reveal" data-tilt>
+        <div class="proj-top">
+          <span class="proj-idx">002</span>
+          <span class="proj-badge badge-pro">HealthTech</span>
+        </div>
+        <h3>Noki &amp; Patient Portal</h3>
+        <p>
+          Healthcare apps built with Kotlin, Compose, MVVM and Retrofit — featuring
+          AI speech-to-text for clinical voice input and a multi-tenant Firebase
+          authentication system with tenant-isolated token handling.
+        </p>
+        <div class="proj-tags">
+          <span class="tag">Kotlin</span><span class="tag">Compose</span>
+          <span class="tag">Azure Speech</span><span class="tag">Firebase</span>
+        </div>
+        <div class="proj-actions">
+          <span class="btn-apk muted">Internal · HealthTech product</span>
+        </div>
+      </article>
+
+      <article class="project reveal" data-tilt>
+        <div class="proj-top">
+          <span class="proj-idx">003</span>
+          <span class="proj-badge badge-live">Live on Play Store</span>
+        </div>
+        <h3>Tosko Academics App</h3>
+        <p>
+          An edtech learning app launched on Google Play — Firebase authentication, an
+          ExoPlayer-based video delivery system and a push-notification pipeline for
+          course updates, with a 20% smaller APK after R8 tuning.
+        </p>
+        <div class="proj-tags">
+          <span class="tag">Kotlin</span><span class="tag">Firebase</span>
+          <span class="tag">ExoPlayer</span><span class="tag">R8</span>
+        </div>
+        <div class="proj-actions">
+          <a class="proj-link" href="https://play.google.com/store/apps/dev?id=5330306881896690112" target="_blank" rel="noopener">
+            Find on Play Store
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17 17 7M9 7h8v8"/></svg>
+          </a>
+        </div>
+      </article>
+
+      <article class="project reveal" data-tilt>
+        <div class="proj-top">
+          <span class="proj-idx">004</span>
+          <span class="proj-badge badge-live">Play Store</span>
+        </div>
+        <h3>More on Google Play</h3>
+        <p>
+          Additional production apps shipped across edtech, healthtech and commerce are
+          published under my Google Play developer profile.
+        </p>
+        <div class="proj-tags">
+          <span class="tag">Android</span><span class="tag">Play Console</span>
+        </div>
+        <div class="proj-actions">
+          <a class="proj-link" href="https://play.google.com/store/apps/dev?id=5330306881896690112" target="_blank" rel="noopener">
+            View developer profile
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17 17 7M9 7h8v8"/></svg>
+          </a>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════ 06 · RECOGNITION ════════════════ -->
+<section id="recognition">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-tag mono">06 — Recognition &amp; Education</span>
+      <h2 class="sec-title">Credentials.</h2>
+    </div>
+    <div class="rec-grid">
+      <div class="rec reveal">
+        <div class="year mono">2020 · National Level Winner</div>
+        <h3>Smart India Hackathon 2020</h3>
+        <div class="org">Team Lead · Government of India</div>
+        <p>
+          Led a six-member team to design an IoT-based automatic waste segregation system
+          using Arduino, sensors and embedded systems. Won first place at the national
+          level and received a ₹50,000 prize from the Government of India.
+        </p>
+      </div>
+      <div class="rec reveal">
+        <div class="year mono">2017 — 2020 · First Division</div>
+        <h3>Bachelor of Computer Applications</h3>
+        <div class="org">UIET, Chhatrapati Shahu Ji Maharaj University — Kanpur</div>
+        <p>
+          Completed a BCA with a First Division, building the computer-science foundation
+          — data structures, algorithms and software design — behind my engineering work.
+        </p>
+      </div>
+      <div class="rec full reveal">
+        <div class="year mono">Certifications</div>
+        <div class="cert-list">
+          <div class="item">
+            <span class="nm">Kotlin for Java Developers</span>
+            <span class="by">JetBrains · Coursera</span>
+          </div>
+          <div class="item">
+            <span class="nm">Leadership Development Program</span>
+            <span class="by">MHRD's Innovation Cell, Govt. of India</span>
+          </div>
+          <div class="item">
+            <span class="nm">Intellectual Property Rights Workshop</span>
+            <span class="by">IIT Kanpur · MSME</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════ 07 · CONTACT ════════════════ -->
+<section id="contact">
+  <div class="wrap">
+    <div class="contact reveal">
+      <h2>Let's build something.</h2>
+      <p>
+        Open to senior Android opportunities and engineering collaborations.
+        The fastest ways to reach me are below.
+      </p>
+      <!-- EDIT: contact links — update email / phone / handles here -->
+      <div class="contact-links">
+        <a class="clink" href="mailto:sureendra.paatel@gmail.com">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
+          Email
+        </a>
+        <a class="clink" href="tel:+918887567406">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"/></svg>
+          Call
+        </a>
+        <a class="clink" href="https://www.linkedin.com/in/sureendrapaatel" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5A2.5 2.5 0 1 1 0 3.5a2.5 2.5 0 0 1 4.98 0M0 8h5v16H0zM7.5 8H12v2.2h.07c.63-1.2 2.17-2.46 4.46-2.46C21.4 7.74 24 10.2 24 15.07V24h-5v-7.9c0-1.88-.03-4.3-2.62-4.3-2.62 0-3.02 2.05-3.02 4.16V24h-5z"/></svg>
+          LinkedIn
+        </a>
+        <!-- EDIT: GitHub — primary account. To show a second account, copy this whole <a> block. -->
+        <a class="clink" href="https://github.com/sureendrapaatel" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.37.5 0 5.87 0 12.5c0 5.3 3.44 9.8 8.2 11.39.6.11.82-.26.82-.58v-2c-3.34.73-4.04-1.6-4.04-1.6-.55-1.4-1.34-1.77-1.34-1.77-1.1-.75.08-.73.08-.73 1.2.09 1.84 1.24 1.84 1.24 1.07 1.84 2.8 1.3 3.49 1 .1-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.13-.3-.54-1.52.12-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.3-1.55 3.3-1.23 3.3-1.23.66 1.66.25 2.88.12 3.18.77.84 1.23 1.91 1.23 3.22 0 4.61-2.8 5.62-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.7.83.58A12 12 0 0 0 24 12.5C24 5.87 18.63.5 12 .5"/></svg>
+          GitHub
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-inner">
+    <span>© <span id="year"></span> Surendra Kumar Patel</span>
+    <span class="mono">Designed &amp; built · Tejvon</span>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  const nav = document.getElementById('nav');
+  addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', scrollY > 20);
+  });
+
+  const burger = document.getElementById('burger');
+  const navlinks = document.getElementById('navlinks');
+  burger.addEventListener('click', () => navlinks.classList.toggle('open'));
+  navlinks.querySelectorAll('a').forEach(a =>
+    a.addEventListener('click', () => navlinks.classList.remove('open'))
+  );
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach((el, i) => {
+    el.style.transitionDelay = (i % 4) * 0.07 + 's';
+    io.observe(el);
+  });
+
+  const links = [...document.querySelectorAll('.nav-links a[data-link]')];
+  const spy = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        links.forEach(l => l.classList.toggle('active',
+          l.getAttribute('href') === '#' + e.target.id));
+      }
+    });
+  }, { rootMargin: '-45% 0px -50% 0px' });
+  ['about','expertise','experience','projects','work','contact'].forEach(id => {
+    const s = document.getElementById(id);
+    if (s) spy.observe(s);
+  });
+
+  document.querySelectorAll('[data-tilt]').forEach(card => {
+    card.addEventListener('pointermove', e => {
+      const r = card.getBoundingClientRect();
+      card.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+      card.style.setProperty('--my', (e.clientY - r.top) + 'px');
+    });
+  });
+</script>
+</body>
+</html>
